@@ -1,6 +1,6 @@
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
-import s from '../ImageGallery/ImageGallery.module.css';
+import s from '../MoviesGallery/MoviesGallery.module.css';
 
 export default function Loader() {
   return (
