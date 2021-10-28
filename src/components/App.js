@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Container from './Container/Container';
 import Navigation from './Navigation/Navigation';
 import Home from './Home/Home';
+import Movies from './Movies/Movies';
 // import Searchbar from './Searchbar/Searchbar';
 // import Loader from './Loader/Loader';
 // import ImageGallery from './ImageGallery/ImageGallery';
@@ -87,6 +88,9 @@ export default function App() {
       <Switch>
         <Route path="/" exact>
           <Home />
+        </Route>
+        <Route path="/movies" exact>
+          <Movies />
         </Route>
       </Switch>
       {/* <Searchbar onSearch={onSearch} />

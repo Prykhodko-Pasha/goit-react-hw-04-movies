@@ -1,4 +1,4 @@
-.whole {
+/* .whole {
   display: flex;
   width: 170px;
   font-size: 50px;
@@ -24,9 +24,9 @@
   text-decoration: none;
   background-color: rgb(255, 230, 0);
   text-align: center;
-  /* margin-top: -10px; */
+   margin-top: -10px; 
 }
 
 .we {
   margin-top: -4px;
-}
+} */

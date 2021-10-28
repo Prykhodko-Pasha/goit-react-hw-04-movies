@@ -7,3 +7,10 @@ export function fetchTrendingMovies(pageNumber) {
     .then(response => response.json())
     .catch(error => Promise.reject(error));
 }
+export function fetchSearchingMovies(searchQuery, pageNumber) {
+  return fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}&page=${pageNumber}`,
+  )
+    .then(response => response.json())
+    .catch(error => Promise.reject(error));
+}

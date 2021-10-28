@@ -15,7 +15,7 @@ export default function Searchbar({ onSearch }) {
   };
 
   return (
-    <header className={s.Searchbar}>
+    <div className={s.Searchbar}>
       <form className={s.SearchForm} onSubmit={onSubmit}>
         <button type="submit" className={s.SearchForm__button}>
           <span className={s.SearchForm__button__label}>Search</span>
@@ -26,11 +26,11 @@ export default function Searchbar({ onSearch }) {
           type="text"
           autoComplete="off"
           autoFocus
-          placeholder="Search images and photos"
+          placeholder="Search movies..."
           onChange={onChange}
         />
       </form>
-    </header>
+    </div>
   );
 }
 

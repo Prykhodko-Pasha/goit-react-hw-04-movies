@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
-import { fetchTrendingMovies } from '../../services/movies-api';
-// import s from './Button.module.css';
+import s from './Movies.module.css';
+import { fetchSearchingMovies } from '../../services/movies-api';
+import Searchbar from '../Searchbar/Searchbar';
 import Loader from '../Loader/Loader';
 import MoviesGallery from '../MoviesGallery/MoviesGallery';
 import Button from '../Button/Button';
 
-export default function Home() {
+export default function Movies() {
+  const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState('idle');
   const [pageNumber, setPageNumber] = useState(1);
@@ -14,11 +16,11 @@ export default function Home() {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    //    if (!searchQuery) return; //отменяем первый рендер или рендер пустой строки
+    if (!searchQuery) return; //отменяем первый рендер или рендер пустой строки
 
     setStatus('pending');
 
-    fetchTrendingMovies(pageNumber)
+    fetchSearchingMovies(searchQuery, pageNumber)
       .then(data => {
         if (data.results === 0) {
           setStatus('rejected');
@@ -50,7 +52,13 @@ export default function Home() {
         setStatus('rejected');
         setErrorMessage(`There is an error: ${err}`);
       });
-  }, [pageNumber]);
+  }, [searchQuery, pageNumber]);
+
+  const onSearch = query => {
+    setSearchQuery(query);
+    setMovies([]);
+    setPageNumber(1);
+  };
 
   const onLoadMore = () => {
     setPageNumber(pageNumber + 1);
@@ -59,6 +67,7 @@ export default function Home() {
 
   return (
     <>
+      <Searchbar onSearch={onSearch} />
       {status === 'pending' && (
         <>
           {movies.length !== 0 && <MoviesGallery moviesArr={movies} />}
@@ -81,7 +90,13 @@ export default function Home() {
     </>
   );
 }
+//   return (
+//     // <div className={s.div}>
 
-// Button.propTypes = {
+//     // </div>
+//   );
+// }
+
+// Movies.propTypes = {
 //   onLoadMore: PropTypes.func.isRequired,
 // };

@@ -6,9 +6,14 @@ export default function MoviesGallery({ moviesArr }) {
   return (
     // <ul className={s.MoviesGallery} onClick={e => onOpenModal(e.target)}>
     <ul className={s.MoviesGallery}>
-      {moviesArr.map(({ id, poster_path, title }, index) => (
+      {moviesArr.map(({ id, poster_path, title, release_date }, index) => (
         <li key={index} className={s.MoviesGalleryItem}>
-          <MoviesGalleryItem id={id} poster_path={poster_path} title={title} />
+          <MoviesGalleryItem
+            id={id}
+            poster_path={poster_path}
+            title={title}
+            release_date={release_date}
+          />
         </li>
       ))}
     </ul>
