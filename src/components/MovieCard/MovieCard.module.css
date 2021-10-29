@@ -1,0 +1,126 @@
+.MovieCard {
+  position: relative;
+  display: block;
+  /* width: 800px; */
+  /* height: 350px; */
+  margin: 20px 0;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: all 0.4s;
+  box-shadow: 0px 0px 120px -25px rgba(0, 0, 0, 0.5);
+  /* &:hover{
+    transform: scale(1.02);
+    box-shadow: 0px 0px 80px -25px rgba(0,0,0, 0.5);
+    transition: all 0.4s;
+  } */
+  padding: 25px;
+  /* background-blend-mode: multiply; */
+  background: linear-gradient(to right, #e5e6e6 50%, transparent 100%);
+}
+.MovieCard__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  /* width: 100%; */
+  /* height: 100%; */
+  /* z-index: 2; */
+  /* border-radius: 10px; */
+}
+.MovieCard__header {
+  display: flex;
+
+  height: 40%;
+}
+.MovieCard__name {
+  /* display: flex; */
+  width: 80%;
+  color: black;
+  font-size: 50px;
+  font-weight: 700;
+}
+
+.MovieCard__year {
+  /* display: flex; */
+  color: #555;
+  font-weight: 700;
+}
+
+.MovieCard__rating {
+  /* display: flex; */
+  text-align: center;
+  width: 50px;
+  /* margin-top: 15px; */
+  color: rgb(255, 255, 255);
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: #596fe9;
+}
+
+.MovieCard__genres {
+  width: 80%;
+  color: #959595;
+  /* margin-left: 10px; */
+}
+
+.MovieCard__img {
+  position: relative;
+  float: left;
+  margin-right: 20px;
+  height: 360px;
+  box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.5);
+}
+
+.MovieCard__desc {
+  /* padding: 25px; */
+  height: 50%;
+}
+.MovieCard__text {
+  color: #545454;
+  font-size: 20px;
+  line-height: 1.5;
+  margin: 20px 0;
+  width: 65%;
+}
+
+.MovieCard__additionalInfo {
+  display: flex;
+  /* padding: 5px; */
+  /* height: 10%; */
+  /* padding-left: 15px;
+  padding-bottom: 20px; */
+}
+.MovieCard__additionalInfo ul {
+  list-style: none;
+  padding: 0;
+}
+.MovieCard__additionalInfo_item {
+  text-decoration: none;
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.3);
+  transition: color 0.3s;
+  transition-delay: 0.15s;
+  margin: 0 10px;
+}
+.MovieCard__additionalInfo_item:hover {
+  transition: color 0.3s;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.MovieCard__additionalInfo_item_active {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.blur_back {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  height: 100%;
+  right: 0;
+  background-size: cover;
+  border-radius: 11px;
+  width: 100%;
+  background-repeat: no-repeat;
+  /* background-position: 50% 50% !important; */
+}

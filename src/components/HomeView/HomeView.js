@@ -6,7 +6,7 @@ import Loader from '../Loader/Loader';
 import MoviesGallery from '../MoviesGallery/MoviesGallery';
 import Button from '../Button/Button';
 
-export default function Home() {
+export default function HomeView() {
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState('idle');
   const [pageNumber, setPageNumber] = useState(1);

@@ -20,7 +20,6 @@ export default function Navigation() {
       >
         Movies
       </NavLink>
-      <hr />
     </nav>
   );
 }

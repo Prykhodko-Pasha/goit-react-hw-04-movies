@@ -8,7 +8,7 @@ export default function MoviesGalleryItem({
   release_date,
 }) {
   const year = release_date.slice(0, 4);
-  console.log(year);
+  // console.log(year);
 
   return (
     <>

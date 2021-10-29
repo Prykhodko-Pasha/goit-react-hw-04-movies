@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
-import s from './Movies.module.css';
+// import s from './MoviesView.module.css';
 import { fetchSearchingMovies } from '../../services/movies-api';
 import Searchbar from '../Searchbar/Searchbar';
 import Loader from '../Loader/Loader';
 import MoviesGallery from '../MoviesGallery/MoviesGallery';
 import Button from '../Button/Button';
 
-export default function Movies() {
+export default function MoviesView() {
   const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState('idle');

@@ -17,6 +17,7 @@
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12); */
   box-shadow: 0px 0px 160px 0px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
+  margin: 20px 0 40px;
 }
 
 .SearchForm {
@@ -34,10 +35,10 @@
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
-  background-size: 40%;
-  background-repeat: no-repeat;
-  background-position: center;
+  /* background-image: url('https://icon-library.com/icon/svg-search-icon-4.html.html'); */
+  /* background-size: 40%; */
+  /* background-repeat: no-repeat;
+  background-position: center; */
   opacity: 0.6;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
