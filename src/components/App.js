@@ -7,7 +7,7 @@ import HomeView from './HomeView/HomeView';
 import MoviesView from './MoviesView/MoviesView';
 import MovieDetailsView from './MovieDetailsView/MovieDetailsView';
 import Reviews from './Reviews/Reviews';
-// import Loader from './Loader/Loader';
+import Cast from './Cast/Cast';
 // import ImageGallery from './ImageGallery/ImageGallery';
 // import Button from './Button/Button';
 // import Modal from './Modal/Modal';
@@ -27,9 +27,9 @@ export default function App() {
           <MovieDetailsView />
         </Route>
       </Switch>
-      {/* <Route path="/movies/:movieId/cast">
+      <Route path="/movies/:movieId/cast">
         <Cast />
-      </Route> */}
+      </Route>
       <Route path="/movies/:movieId/reviews">
         <Reviews />
       </Route>
