@@ -87,7 +87,7 @@ export default function Cast() {
           <ul className={s.Cast}>
             {cast.map(({ id, name, profile_path, character }, index) => (
               <CastItem
-                key={id}
+                key={index}
                 name={name}
                 profile_path={profile_path}
                 character={character}

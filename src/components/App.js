@@ -13,24 +13,26 @@ import Cast from './Cast/Cast';
 // import Modal from './Modal/Modal';
 
 export default function App() {
+  const BASE_URL = 'goit-react-hw-04-movies';
+
   return (
     <Container>
       <Navigation />
       <Switch>
-        <Route path="/" exact>
+        <Route path={`/${BASE_URL}/`} exact>
           <HomeView />
         </Route>
-        <Route path="/movies" exact>
+        <Route path={`/${BASE_URL}/movies`} exact>
           <MoviesView />
         </Route>
-        <Route path="/movies/:movieId">
+        <Route path={`/${BASE_URL}/movies/:movieId`}>
           <MovieDetailsView />
         </Route>
       </Switch>
-      <Route path="/movies/:movieId/cast">
+      <Route path={`/${BASE_URL}/movies/:movieId/cast`}>
         <Cast />
       </Route>
-      <Route path="/movies/:movieId/reviews">
+      <Route path={`/${BASE_URL}/movies/:movieId/reviews`}>
         <Reviews />
       </Route>
       {/* <Reviews onSearch={onSearch} />

@@ -4,12 +4,16 @@ import s from './MoviesGallery.module.css';
 import MoviesGalleryItem from '../MoviesGalleryItem/MoviesGalleryItem';
 
 export default function MoviesGallery({ moviesArr }) {
-  // const { url } = useRouteMatch();
+  const BASE_URL = 'goit-react-hw-04-movies';
   return (
     // <ul className={s.MoviesGallery} onClick={e => onOpenModal(e.target)}>
     <ul className={s.MoviesGallery}>
       {moviesArr.map(({ id, poster_path, title, release_date }) => (
-        <Link to={`/movies/${id}`} key={id} className={s.MoviesGalleryItem}>
+        <Link
+          to={`/${BASE_URL}/movies/${id}`}
+          key={id}
+          className={s.MoviesGalleryItem}
+        >
           <MoviesGalleryItem
             id={id}
             poster_path={poster_path}

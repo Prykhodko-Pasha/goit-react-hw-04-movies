@@ -2,10 +2,11 @@ import { NavLink } from 'react-router-dom';
 import s from './Navigation.module.css';
 
 export default function Navigation() {
+  const BASE_URL = 'goit-react-hw-04-movies';
   return (
     <nav className={s.nav}>
       <NavLink
-        to="/"
+        to={`/${BASE_URL}/`}
         exact
         className={s.nav__link}
         activeClassName={s.nav__link_active}
@@ -14,7 +15,7 @@ export default function Navigation() {
       </NavLink>
 
       <NavLink
-        to="/movies"
+        to={`/${BASE_URL}/movies`}
         className={s.nav__link}
         activeClassName={s.nav__link_active}
       >
