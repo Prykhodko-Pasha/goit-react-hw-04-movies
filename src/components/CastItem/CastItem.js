@@ -5,7 +5,7 @@ export default function CastItem({ name, profile_path, character }) {
   const BASE_URL = 'https://image.tmdb.org/t/p/original';
   const photoSrc = profile_path
     ? `${BASE_URL}${profile_path}`
-    : 'http://placeimg.com/200/300';
+    : 'https://api.lorem.space/image/face?w=200&h=300';
   // console.log(year);
 
   return (

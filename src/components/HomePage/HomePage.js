@@ -6,7 +6,7 @@ import Loader from '../Loader/Loader';
 import MoviesGallery from '../MoviesGallery/MoviesGallery';
 import Button from '../Button/Button';
 
-export default function HomeView() {
+export default function HomePage() {
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState('idle');
   const [pageNumber, setPageNumber] = useState(1);
@@ -17,39 +17,47 @@ export default function HomeView() {
     //    if (!searchQuery) return; //отменяем первый рендер или рендер пустой строки
 
     setStatus('pending');
+    setTimeout(() => {
+      fetchTrendingMovies(pageNumber)
+        .then(data => {
+          if (data.results === 0) {
+            setStatus('rejected');
+            setErrorMessage('Something gone wrong :(');
+          } else {
+            const totalPages = Math.ceil(data.total_pages / 12);
+            const usableMovieKeysArr = data.results.map(
+              ({ id, poster_path, title, release_date }) => {
+                return {
+                  id,
+                  poster_path,
+                  title,
+                  release_date,
+                };
+              },
+            );
 
-    fetchTrendingMovies(pageNumber)
-      .then(data => {
-        if (data.results === 0) {
+            setMovies(prevMovies => [...prevMovies, ...usableMovieKeysArr]);
+            setStatus('resolved');
+            setShowLoadMoreBtn(totalPages === pageNumber ? false : true);
+          }
+          // }
+        })
+        .catch(err => {
           setStatus('rejected');
-          setErrorMessage('Something gone wrong :(');
-        } else {
-          const totalPages = Math.ceil(data.total_pages / 12);
-          const usableMovieKeysArr = data.results.map(
-            ({ id, poster_path, title, release_date }) => {
-              return {
-                id,
-                poster_path,
-                title,
-                release_date,
-              };
-            },
-          );
+          setErrorMessage(`There is an error: ${err}`);
+        });
+    }, 3000);
+    // const loader = document.querySelector('.Loader');
+    // window.scrollBy(0, window.innerHeight);
+    // console.log(loader);
+    console.log(document.documentElement.scrollHeight - window.innerHeight);
+    console.log(document.documentElement.scrollHeight);
+    // if (loader) {
 
-          setMovies(prevMovies => [...prevMovies, ...usableMovieKeysArr]);
-          setStatus('resolved');
-          setShowLoadMoreBtn(totalPages === pageNumber ? false : true);
-        }
-
-        // window.scrollTo({
-        //   top: document.documentElement.scrollHeight,
-        //   behavior: 'smooth',
-        // });
-      })
-      .catch(err => {
-        setStatus('rejected');
-        setErrorMessage(`There is an error: ${err}`);
-      });
+    window.scrollTo({
+      top: document.documentElement.scrollHeight - window.innerHeight,
+      behavior: 'smooth',
+    });
   }, [pageNumber]);
 
   const onLoadMore = () => {
@@ -62,7 +70,9 @@ export default function HomeView() {
       {status === 'pending' && (
         <>
           {movies.length !== 0 && <MoviesGallery moviesArr={movies} />}
-          <Loader />
+          <div style={{ height: '80vh' }}>
+            <Loader />
+          </div>
           <div className="loadMoreReplacer"></div>
         </>
       )}

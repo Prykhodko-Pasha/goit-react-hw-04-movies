@@ -9,7 +9,7 @@ import Loader from '../Loader/Loader';
 // import Button from '../Button/Button';
 import MovieCard from '../MovieCard/MovieCard';
 
-export default function MovieDetailsView() {
+export default function MovieDetailsPage() {
   //   const [searchQuery, setSearchQuery] = useState('');
   const [movie, setMovie] = useState({});
   const [status, setStatus] = useState('idle');
@@ -23,41 +23,42 @@ export default function MovieDetailsView() {
     // if (!searchQuery) return; //отменяем первый рендер или рендер пустой строки
 
     setStatus('pending');
+    setTimeout(() => {
+      fetchMovieById(movieId)
+        .then(
+          data => {
+            if (data.results === 0) {
+              setStatus('rejected');
+              setErrorMessage('Something gone wrong :(');
+            } else {
+              //   const totalPages = Math.ceil(data.total_pages / 12);
+              // const {
+              //   id,
+              //   poster_path,
+              //   backdrop_path,
+              //   title,
+              //   release_date,
+              //   vote_average,
+              //   overview,
+              //   genresArr,
+              // } = data;
+              setMovie(data);
+              setStatus('resolved');
+            }
 
-    fetchMovieById(movieId)
-      .then(
-        data => {
-          if (data.results === 0) {
-            setStatus('rejected');
-            setErrorMessage('Something gone wrong :(');
-          } else {
-            //   const totalPages = Math.ceil(data.total_pages / 12);
-            // const {
-            //   id,
-            //   poster_path,
-            //   backdrop_path,
-            //   title,
-            //   release_date,
-            //   vote_average,
-            //   overview,
-            //   genresArr,
-            // } = data;
-            setMovie(data);
-            setStatus('resolved');
-          }
+            //   setShowLoadMoreBtn(totalPages === pageNumber ? false : true);
+          },
 
-          //   setShowLoadMoreBtn(totalPages === pageNumber ? false : true);
-        },
-
-        // window.scrollTo({
-        //   top: document.documentElement.scrollHeight,
-        //   behavior: 'smooth',
-        // });
-      )
-      .catch(err => {
-        setStatus('rejected');
-        setErrorMessage(`There is an error: ${err}`);
-      });
+          // window.scrollTo({
+          //   top: document.documentElement.scrollHeight,
+          //   behavior: 'smooth',
+          // });
+        )
+        .catch(err => {
+          setStatus('rejected');
+          setErrorMessage(`There is an error: ${err}`);
+        });
+    }, 3000);
   }, [movieId]);
 
   //   const onSearch = query => {
@@ -75,11 +76,9 @@ export default function MovieDetailsView() {
     <>
       {/* <Searchbar onSearch={onSearch} /> */}
       {status === 'pending' && (
-        <>
-          {/* {movies.length !== 0 && <MoviesGallery moviesArr={movies} />} */}
+        <div style={{ height: '80vh' }}>
           <Loader />
-          <div className="loadMoreReplacer"></div>
-        </>
+        </div>
       )}
       {status === 'rejected' && <p className="Msg">{errorMessage}</p>}
       {status === 'resolved' && (

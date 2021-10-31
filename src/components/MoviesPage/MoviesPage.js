@@ -7,7 +7,7 @@ import Loader from '../Loader/Loader';
 import MoviesGallery from '../MoviesGallery/MoviesGallery';
 import Button from '../Button/Button';
 
-export default function MoviesView() {
+export default function MoviesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState('idle');
@@ -19,7 +19,7 @@ export default function MoviesView() {
     if (!searchQuery) return; //отменяем первый рендер или рендер пустой строки
 
     setStatus('pending');
-
+    // setTimeout(() => {
     fetchSearchingMovies(searchQuery, pageNumber)
       .then(data => {
         if (data.results === 0) {
@@ -52,6 +52,12 @@ export default function MoviesView() {
         setStatus('rejected');
         setErrorMessage(`There is an error: ${err}`);
       });
+    // }, 3000);
+
+    window.scrollTo({
+      top: document.documentElement.scrollHeight - window.innerHeight,
+      behavior: 'smooth',
+    });
   }, [searchQuery, pageNumber]);
 
   const onSearch = query => {
@@ -71,7 +77,10 @@ export default function MoviesView() {
       {status === 'pending' && (
         <>
           {movies.length !== 0 && <MoviesGallery moviesArr={movies} />}
-          <Loader />
+          <div style={{ height: '60vh' }}>
+            <Loader />
+          </div>
+          {/* style={{ height: '70vh' }}*/}
           <div className="loadMoreReplacer"></div>
         </>
       )}
