@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 // import s from './MoviesView.module.css';
 import { fetchSearchingMovies } from '../../services/movies-api';
@@ -14,6 +15,19 @@ export default function MoviesPage() {
   const [pageNumber, setPageNumber] = useState(1);
   const [showLoadMoreBtn, setShowLoadMoreBtn] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const history = useHistory();
+  const location = useLocation();
+  // const params = useParams();
+  console.log(location);
+  const searchParams = new URLSearchParams(location.search);
+  console.log(searchParams);
+  const searchParamFromURL = searchParams.get('query');
+  console.log(searchParamFromURL);
+
+  useEffect(() => {
+    searchParamFromURL && setSearchQuery(searchParamFromURL);
+  }, [searchParamFromURL]);
 
   useEffect(() => {
     if (!searchQuery) return; //отменяем первый рендер или рендер пустой строки
@@ -64,6 +78,8 @@ export default function MoviesPage() {
     setSearchQuery(query);
     setMovies([]);
     setPageNumber(1);
+    history.push(`?query=${query}`);
+    // location.search = `?query=${query}`;
   };
 
   const onLoadMore = () => {

@@ -1,7 +1,16 @@
 import { lazy, Suspense } from 'react';
-import { NavLink, useRouteMatch, Switch, Route } from 'react-router-dom';
+import {
+  Link,
+  NavLink,
+  useRouteMatch,
+  Switch,
+  Route,
+  useLocation,
+  useHistory,
+} from 'react-router-dom';
 import {} from 'react-router-dom';
 import Loader from '../Loader/Loader';
+import GoBackButton from '../GoBackButton/GoBackButton';
 
 import s from './MovieCard.module.css';
 
@@ -12,6 +21,9 @@ const Reviews = lazy(() =>
 
 export default function MovieCard({ movie }) {
   const { url, path } = useRouteMatch();
+  const location = useLocation();
+  console.log(location.state);
+  const history = useHistory();
   //   const params = useRouteMatch();
   //   console.log(params, '- params useRouteMatch');
 
@@ -38,9 +50,16 @@ export default function MovieCard({ movie }) {
   //   console.log(year);
   const genresNamesStr = genres.map(genre => genre.name).join(', ');
 
+  function onGoBack() {
+    history.push(location?.state?.from ?? '/goit-react-hw-04-movies/');
+  }
+
   return (
     <>
       <div className={s.MovieCard}>
+        <Link to={location?.state?.from ?? '/goit-react-hw-04-movies/'}>
+          <GoBackButton onGoBack={onGoBack} />
+        </Link>
         <div className={s.MovieCard__header}>
           <img
             alt={`${title}_poster`}
@@ -60,14 +79,22 @@ export default function MovieCard({ movie }) {
         <div className={s.MovieCard__additionalInfo}>
           <ul>
             <NavLink
-              to={`${url}/cast`}
+              to={{
+                pathname: `${url}/cast`,
+                state: { from: location.state && location.state.from },
+              }}
+              //   to={`${url}/cast`}
               className={s.MovieCard__additionalInfo_item}
               activeClassName={s.MovieCard__additionalInfo_item_active}
             >
               Cast
             </NavLink>
             <NavLink
-              to={`${url}/reviews`}
+              to={{
+                pathname: `${url}/reviews`,
+                state: { from: location.state && location.state.from },
+              }}
+              //   to={`${url}/reviews`}
               className={s.MovieCard__additionalInfo_item}
               activeClassName={s.MovieCard__additionalInfo_item_active}
             >

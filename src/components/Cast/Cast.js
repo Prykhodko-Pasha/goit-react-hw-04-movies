@@ -94,9 +94,9 @@ export default function Cast() {
       {/* <Searchbar onSearch={onSearch} /> */}
       {status === 'pending' && (
         <>
-          {/* {movies.length !== 0 && <MoviesGallery moviesArr={movies} />} */}
+          {/* <div style={{ height: '10vh' }}> */}
           <Loader />
-          <div className="loadMoreReplacer"></div>
+          {/* </div> */}
         </>
       )}
       {status === 'rejected' && <p className="Msg">{errorMessage}</p>}

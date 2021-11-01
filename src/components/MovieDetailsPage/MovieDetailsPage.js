@@ -18,6 +18,7 @@ export default function MovieDetailsPage() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const { movieId } = useParams();
+  // const location = useLocation();
 
   useEffect(() => {
     window.scrollTo({
@@ -90,9 +91,9 @@ export default function MovieDetailsPage() {
     <>
       {/* <Searchbar onSearch={onSearch} /> */}
       {status === 'pending' && (
-        <div style={{ height: '80vh' }}>
-          <Loader />
-        </div>
+        // <div style={{ height: '80vh' }}>
+        <Loader />
+        // </div>
       )}
       {status === 'rejected' && <p className="Msg">{errorMessage}</p>}
       {status === 'resolved' && (

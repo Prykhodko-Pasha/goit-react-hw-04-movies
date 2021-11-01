@@ -103,7 +103,8 @@
   transition-delay: 0.15s;
   margin: 0 10px;
 }
-.MovieCard__additionalInfo_item:hover {
+.MovieCard__additionalInfo_item:hover,
+.MovieCard__additionalInfo_item:focus {
   transition: color 0.3s;
   color: rgba(0, 0, 0, 0.7);
 }
