@@ -20,45 +20,59 @@ export default function MovieDetailsPage() {
   const { movieId } = useParams();
 
   useEffect(() => {
+    window.scrollTo({
+      top: window.innerHeight / 2,
+      behavior: 'smooth',
+    });
+  });
+
+  useEffect(() => {
     // if (!searchQuery) return; //отменяем первый рендер или рендер пустой строки
 
     setStatus('pending');
-    setTimeout(() => {
-      fetchMovieById(movieId)
-        .then(
-          data => {
-            if (data.results === 0) {
-              setStatus('rejected');
-              setErrorMessage('Something gone wrong :(');
-            } else {
-              //   const totalPages = Math.ceil(data.total_pages / 12);
-              // const {
-              //   id,
-              //   poster_path,
-              //   backdrop_path,
-              //   title,
-              //   release_date,
-              //   vote_average,
-              //   overview,
-              //   genresArr,
-              // } = data;
-              setMovie(data);
-              setStatus('resolved');
-            }
+    // setTimeout(() => {
+    fetchMovieById(movieId)
+      .then(
+        data => {
+          if (data.results === 0) {
+            setStatus('rejected');
+            setErrorMessage('Something gone wrong :(');
+          } else {
+            //   const totalPages = Math.ceil(data.total_pages / 12);
+            // const {
+            //   id,
+            //   poster_path,
+            //   backdrop_path,
+            //   title,
+            //   release_date,
+            //   vote_average,
+            //   overview,
+            //   genresArr,
+            // } = data;
+            setMovie(data);
+            setStatus('resolved');
+          }
 
-            //   setShowLoadMoreBtn(totalPages === pageNumber ? false : true);
-          },
+          //   setShowLoadMoreBtn(totalPages === pageNumber ? false : true);
+        },
 
-          // window.scrollTo({
-          //   top: document.documentElement.scrollHeight,
-          //   behavior: 'smooth',
-          // });
-        )
-        .catch(err => {
-          setStatus('rejected');
-          setErrorMessage(`There is an error: ${err}`);
-        });
-    }, 3000);
+        // window.scrollTo({
+        //   top: document.documentElement.scrollHeight,
+        //   behavior: 'smooth',
+        // });
+      )
+      .catch(err => {
+        setStatus('rejected');
+        setErrorMessage(`There is an error: ${err}`);
+      });
+    // }, 3000);
+    // window.scrollTo({
+    //   top: window.innerHeight / 2,
+    //   behavior: 'smooth',
+    // });
+    // const el = document.querySelector('.MovieCard__additionalInfo_item');
+    // console.log(el);
+    // el.scrollIntoView();
   }, [movieId]);
 
   //   const onSearch = query => {

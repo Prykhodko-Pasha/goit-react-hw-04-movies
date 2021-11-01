@@ -23,18 +23,15 @@ export function fetchMovieById(movieId) {
     .catch(error => Promise.reject(error));
 }
 
-export function fetchMovieReviews(movieId, pageNumber) {
-  return fetch(
-    `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=${pageNumber}`,
-  )
+export function fetchMovieReviews(movieId) {
+  return fetch(`${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}`)
     .then(response => response.json())
     .catch(error => Promise.reject(error));
 }
 
 export function fetchMovieCast(movieId) {
-  return fetch(
-    `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`,
-  )
+  console.log(`${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`);
+  return fetch(`${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`)
     .then(response => response.json())
     .catch(error => Promise.reject(error));
 }

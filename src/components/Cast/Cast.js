@@ -15,12 +15,26 @@ export default function Cast() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const { movieId } = useParams();
+  //   const params = useParams();
+  //   console.log(movieId, '- movieId from useParams');
+  //   console.log(params, '- params');
+
+  //   useEffect(() => {
+
+  //   });
+  useEffect(() => {
+    window.scrollTo({
+      top: window.innerHeight / 2,
+      behavior: 'smooth',
+    });
+  });
 
   useEffect(() => {
     // if (!searchQuery) return; //отменяем первый рендер или рендер пустой строки
 
     setStatus('pending');
 
+    console.log(movieId, '- movieId in fetch');
     fetchMovieCast(movieId)
       .then(
         data => {
@@ -58,6 +72,10 @@ export default function Cast() {
         setStatus('rejected');
         setErrorMessage(`There is an error: ${err}`);
       });
+
+    // const el = document.getElementById('scrollTo');
+    // console.log(el);
+    // el.scrollIntoView({ block: 'center', inline: 'center' });
   }, [movieId]);
 
   //   const onSearch = query => {

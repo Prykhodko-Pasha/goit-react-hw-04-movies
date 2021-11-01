@@ -19,10 +19,10 @@ const MovieDetailsPage = lazy(() =>
     './MovieDetailsPage/MovieDetailsPage' /* webpackChunkName: 'movie-details-page' */
   ),
 );
-const Cast = lazy(() => import('./Cast/Cast' /* webpackChunkName: 'cast' */));
-const Reviews = lazy(() =>
-  import('./Reviews/Reviews' /* webpackChunkName: 'reviews' */),
-);
+// const Cast = lazy(() => import('./Cast/Cast' /* webpackChunkName: 'cast' */));
+// const Reviews = lazy(() =>
+//   import('./Reviews/Reviews' /* webpackChunkName: 'reviews' */),
+// );
 // import ImageGallery from './ImageGallery/ImageGallery';
 // import Button from './Button/Button';
 // import Modal from './Modal/Modal';
@@ -45,12 +45,12 @@ export default function App() {
             <MovieDetailsPage />
           </Route>
         </Switch>
-        <Route path={`/${BASE_URL}/movies/:movieId/cast`}>
+        {/* <Route path={`/${BASE_URL}/movies/:movieId/cast`}>
           <Cast />
         </Route>
         <Route path={`/${BASE_URL}/movies/:movieId/reviews`}>
           <Reviews />
-        </Route>
+        </Route> */}
       </Suspense>
       {/* <Reviews onSearch={onSearch} />
       {status === 'idle' && <p className="Msg">Enter search query :)</p>}

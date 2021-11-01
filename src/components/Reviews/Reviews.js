@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import s from './Reviews.module.css';
 import { fetchMovieReviews } from '../../services/movies-api';
 import Loader from '../Loader/Loader';
@@ -15,6 +15,13 @@ export default function Reviews() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const { movieId } = useParams();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: window.innerHeight / 2,
+      behavior: 'smooth',
+    });
+  });
 
   useEffect(() => {
     // if (!searchQuery) return; //отменяем первый рендер или рендер пустой строки
@@ -60,6 +67,11 @@ export default function Reviews() {
         setStatus('rejected');
         setErrorMessage(`There is an error: ${err}`);
       });
+
+    window.scrollTo({
+      top: window.innerHeight / 2,
+      behavior: 'smooth',
+    });
   }, [movieId, pageNumber]);
 
   //   const onSearch = query => {
@@ -73,6 +85,7 @@ export default function Reviews() {
     setStatus('pending');
   };
 
+  //   const h = window.innerHeight / 2;
   return (
     <>
       {/* <Searchbar onSearch={onSearch} /> */}
@@ -83,7 +96,11 @@ export default function Reviews() {
           <div className="loadMoreReplacer"></div>
         </>
       )}
-      {status === 'rejected' && <p className="Msg">{errorMessage}</p>}
+      {status === 'rejected' && (
+        <p className="Msg" style={{ height: window.innerHeight / 2 }}>
+          {errorMessage}
+        </p>
+      )}
       {status === 'resolved' && (
         <>
           <ul className={s.Reviews}>
