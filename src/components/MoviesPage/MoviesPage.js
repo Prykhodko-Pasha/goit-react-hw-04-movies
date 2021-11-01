@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams, useLocation } from 'react-router-dom';
-// import PropTypes from 'prop-types';
-// import s from './MoviesView.module.css';
+import { useHistory, useLocation } from 'react-router-dom';
 import { fetchSearchingMovies } from '../../services/movies-api';
 import Searchbar from '../Searchbar/Searchbar';
 import Loader from '../Loader/Loader';
@@ -18,27 +16,25 @@ export default function MoviesPage() {
 
   const history = useHistory();
   const location = useLocation();
-  // const params = useParams();
-  console.log(location);
   const searchParams = new URLSearchParams(location.search);
-  console.log(searchParams);
-  const searchParamFromURL = searchParams.get('query');
-  console.log(searchParamFromURL);
+  // console.log(searchParams);
+  const queryParam = searchParams.get('query');
+  // console.log(searchParamFromURL);
 
   useEffect(() => {
-    searchParamFromURL && setSearchQuery(searchParamFromURL);
-  }, [searchParamFromURL]);
+    queryParam && setSearchQuery(queryParam);
+  }, [queryParam]);
 
   useEffect(() => {
     if (!searchQuery) return; //отменяем первый рендер или рендер пустой строки
 
     setStatus('pending');
-    // setTimeout(() => {
+
     fetchSearchingMovies(searchQuery, pageNumber)
       .then(data => {
-        if (data.results === 0) {
+        if (data.results.length === 0) {
           setStatus('rejected');
-          setErrorMessage('Something gone wrong :(');
+          setErrorMessage('There are no movies for this query :(');
         } else {
           const totalPages = Math.ceil(data.total_pages / 12);
           const usableMovieKeysArr = data.results.map(
@@ -56,17 +52,11 @@ export default function MoviesPage() {
           setStatus('resolved');
           setShowLoadMoreBtn(totalPages === pageNumber ? false : true);
         }
-
-        // window.scrollTo({
-        //   top: document.documentElement.scrollHeight,
-        //   behavior: 'smooth',
-        // });
       })
       .catch(err => {
         setStatus('rejected');
         setErrorMessage(`There is an error: ${err}`);
       });
-    // }, 3000);
 
     window.scrollTo({
       top: document.documentElement.scrollHeight - window.innerHeight,
@@ -79,7 +69,6 @@ export default function MoviesPage() {
     setMovies([]);
     setPageNumber(1);
     history.push(`?query=${query}`);
-    // location.search = `?query=${query}`;
   };
 
   const onLoadMore = () => {
@@ -96,7 +85,6 @@ export default function MoviesPage() {
           <div style={{ height: '60vh' }}>
             <Loader />
           </div>
-          {/* style={{ height: '70vh' }}*/}
           <div className="loadMoreReplacer"></div>
         </>
       )}
@@ -107,21 +95,6 @@ export default function MoviesPage() {
           {showLoadMoreBtn && <Button onLoadMore={onLoadMore} />}
         </>
       )}
-      {/* {showModal && (
-        <Modal onClose={onCloseModal}>
-          <img src={src} alt="" />
-        </Modal>
-      )} */}
     </>
   );
 }
-//   return (
-//     // <div className={s.div}>
-
-//     // </div>
-//   );
-// }
-
-// Movies.propTypes = {
-//   onLoadMore: PropTypes.func.isRequired,
-// };

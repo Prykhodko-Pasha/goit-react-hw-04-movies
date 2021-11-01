@@ -5,11 +5,11 @@ import s from './GoBackButton.module.css';
 export default function GoBackButton({ onGoBack }) {
   return (
     <button type="button" className={s.GoBackButton} onClick={onGoBack}>
-      &#8592; Go back
+      &#8592; Go to list
     </button>
   );
 }
 
 GoBackButton.propTypes = {
-  onGoBack: PropTypes.func.isRequired,
+  onGoBack: PropTypes.func,
 };

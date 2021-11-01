@@ -8,7 +8,6 @@ export default function MoviesGalleryItem({
   release_date,
 }) {
   const year = release_date ? release_date.slice(0, 4) : '0000';
-  // console.log(year);
 
   return (
     <>
@@ -21,21 +20,10 @@ export default function MoviesGalleryItem({
         }
         alt=""
         className={s.MoviesGalleryItem__image}
-        // data-src={title}
       />
       <div className={s.MoviesGalleryItem__descr}>
         <p className={s.MoviesGalleryItem__name}>{title}</p>
         <p className={s.MoviesGalleryItem__year}>{year}</p>
-
-        {/* <ul className={s.MoviesGalleryItem__descr}>        
-          {{#each genre_ids}}
-            <li className='film-gallery__genre'> {{this}}</li>
-          {{/each}}
-        <li className='film-gallery__year'>
-          &#124; {{release_date}}
-        </li>    
-        <li className='film-gallery__vote'>{{vote_average}}</li>
-      </ul> */}
       </div>
     </>
   );

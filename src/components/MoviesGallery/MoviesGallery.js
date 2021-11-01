@@ -10,7 +10,6 @@ export default function MoviesGallery({ moviesArr }) {
   const location = useLocation();
 
   return (
-    // <ul className={s.MoviesGallery} onClick={e => onOpenModal(e.target)}>
     <ul className={s.MoviesGallery}>
       {moviesArr.map(({ id, poster_path, title, release_date }, index) => (
         <Link
@@ -35,5 +34,4 @@ export default function MoviesGallery({ moviesArr }) {
 
 MoviesGallery.propTypes = {
   moviesArr: PropTypes.arrayOf(PropTypes.object).isRequired,
-  // onOpenModal: PropTypes.func,
 };

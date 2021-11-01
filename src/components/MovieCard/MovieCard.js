@@ -8,11 +8,10 @@ import {
   useLocation,
   useHistory,
 } from 'react-router-dom';
-import {} from 'react-router-dom';
 import Loader from '../Loader/Loader';
 import GoBackButton from '../GoBackButton/GoBackButton';
-
 import s from './MovieCard.module.css';
+import PropTypes from 'prop-types';
 
 const Cast = lazy(() => import('../Cast/Cast' /* webpackChunkName: "cast" */));
 const Reviews = lazy(() =>
@@ -22,20 +21,9 @@ const Reviews = lazy(() =>
 export default function MovieCard({ movie }) {
   const { url, path } = useRouteMatch();
   const location = useLocation();
-  console.log(location.state);
+  // console.log(location.state);
   const history = useHistory();
-  //   const params = useRouteMatch();
-  //   console.log(params, '- params useRouteMatch');
-
-  //   useEffect(() => {
-  //     window.scrollTo({
-  //       top: window.innerHeight / 2,
-  //       behavior: 'smooth',
-  //     });
-  //   });
-
   const {
-    // id,
     poster_path,
     backdrop_path,
     title,
@@ -47,7 +35,6 @@ export default function MovieCard({ movie }) {
   const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/original';
   const year = release_date.slice(0, 4);
   const rating = vote_average % 1 === 0 ? `${vote_average}.0` : vote_average;
-  //   console.log(year);
   const genresNamesStr = genres.map(genre => genre.name).join(', ');
 
   function onGoBack() {
@@ -81,9 +68,8 @@ export default function MovieCard({ movie }) {
             <NavLink
               to={{
                 pathname: `${url}/cast`,
-                state: { from: location.state && location.state.from },
+                state: { from: location?.state?.from },
               }}
-              //   to={`${url}/cast`}
               className={s.MovieCard__additionalInfo_item}
               activeClassName={s.MovieCard__additionalInfo_item_active}
             >
@@ -92,16 +78,13 @@ export default function MovieCard({ movie }) {
             <NavLink
               to={{
                 pathname: `${url}/reviews`,
-                state: { from: location.state && location.state.from },
+                state: { from: location?.state?.from },
               }}
-              //   to={`${url}/reviews`}
               className={s.MovieCard__additionalInfo_item}
               activeClassName={s.MovieCard__additionalInfo_item_active}
             >
               Reviews
             </NavLink>
-            {/* <li>Cast</li>
-          <li>Reviews</li> */}
           </ul>
         </div>
         <div
@@ -124,9 +107,14 @@ export default function MovieCard({ movie }) {
   );
 }
 
-// MovieCard.propTypes = {
-//   id: PropTypes.number.isRequired,
-//   poster_path: PropTypes.string,
-//   title: PropTypes.string.isRequired,
-//   release_date: PropTypes.string.isRequired,
-// };
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    poster_path: PropTypes.string.isRequired,
+    backdrop_path: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    release_date: PropTypes.string.isRequired,
+    vote_average: PropTypes.number.isRequired,
+    overview: PropTypes.string.isRequired,
+    genres: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  }),
+};
