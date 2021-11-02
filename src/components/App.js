@@ -22,25 +22,18 @@ const NotFoundPage = lazy(() =>
 );
 
 export default function App() {
-  // const { url, path } = useRouteMatch();
-
-  // const BASE_URL = 'goit-react-hw-04-movies';
-
   return (
     <Container>
       <Navigation />
       <Suspense fallback={<Loader />}>
         <Switch>
-          {/* <Route path={`/${BASE_URL}/`} exact> */}
-          <Route path={'/'} exact>
+          <Route path="/" exact>
             <HomePage />
           </Route>
-          {/* <Route path={`/${BASE_URL}/movies`} exact> */}
-          <Route path={'/movies'} exact>
+          <Route path="/movies" exact>
             <MoviesPage />
           </Route>
-          {/* <Route path={`/${BASE_URL}/movies/:movieId`}> */}
-          <Route path={'/movies/:movieId'}>
+          <Route path="/movies/:movieId">
             <MovieDetailsPage />
           </Route>
           <Route>

@@ -38,13 +38,13 @@ export default function MovieCard({ movie }) {
   const genresNamesStr = genres.map(genre => genre.name).join(', ');
 
   function onGoBack() {
-    history.push(location?.state?.from ?? '/goit-react-hw-04-movies/');
+    history.push(location?.state?.from ?? '');
   }
 
   return (
     <>
       <div className={s.MovieCard}>
-        <Link to={location?.state?.from ?? '/goit-react-hw-04-movies/'}>
+        <Link to={location?.state?.from ?? ''}>
           <GoBackButton onGoBack={onGoBack} />
         </Link>
         <div className={s.MovieCard__header}>
